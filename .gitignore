@@ -1,0 +1,10 @@
+node_modules/
+package-lock.json
+yarn.lock
+frontend/build/
+frontend/node_modules/
+frontend/package-lock.json
+backend/node_modules/
+backend/package-lock.json
+build/
+dist/
