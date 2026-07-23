@@ -1,5 +1,5 @@
 /* ============================================================
-   ГЛОБАЛЬНЫЕ СТИЛИ
+   ГЛОБАЛЬНЫЕ СТИЛИ (VK COLOR SCHEME)
    ============================================================ */
 
 * {
@@ -9,8 +9,8 @@
 }
 
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #edeef0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -33,14 +33,14 @@ body {
 }
 
 /* ============================================================
-   КАРТОЧКА
+   КАРТОЧКА (VK STYLE)
    ============================================================ */
 
 .card {
-  background: white;
+  background: #ffffff;
   padding: 40px 45px;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   animation: fadeIn 0.4s ease;
 }
 
@@ -49,7 +49,7 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
+  from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -63,23 +63,24 @@ body {
 }
 
 .header-brand h1 {
-  font-size: 34px;
-  font-weight: 800;
-  color: #2d3748;
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: -0.5px;
 }
 
 .header-brand h1 span {
-  color: #e94560;
+  color: #4a76a8;
 }
 
-.subtitle {
-  color: #718096;
+.header-brand .subtitle {
+  color: #818c99;
   font-size: 15px;
   margin-top: 4px;
 }
 
 /* ============================================================
-   ФОРМА
+   ФОРМА (VK STYLE)
    ============================================================ */
 
 .form-group {
@@ -91,8 +92,8 @@ body {
 
 .form-group label {
   font-size: 14px;
-  font-weight: 600;
-  color: #4a5568;
+  font-weight: 500;
+  color: #2c3e50;
 }
 
 .form-group input,
@@ -100,20 +101,20 @@ body {
 .form-group textarea {
   padding: 12px 16px;
   font-size: 15px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid #e1e5eb;
   border-radius: 10px;
   outline: none;
   transition: 0.3s;
   font-family: inherit;
-  background: white;
+  background: #ffffff;
   width: 100%;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #e94560;
-  box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.15);
+  border-color: #4a76a8;
+  box-shadow: 0 0 0 3px rgba(74, 118, 168, 0.15);
 }
 
 .form-group textarea {
@@ -122,7 +123,7 @@ body {
 }
 
 /* ============================================================
-   КНОПКИ
+   КНОПКИ (VK STYLE)
    ============================================================ */
 
 .menu-buttons {
@@ -133,23 +134,23 @@ body {
 }
 
 .btn-primary {
-  background: #e94560;
-  color: white;
+  background: #4a76a8;
+  color: #ffffff;
   padding: 14px;
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   font-family: inherit;
   width: 100%;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #c73e54;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
+  background: #3b5f8a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 118, 168, 0.3);
 }
 
 .btn-primary:disabled {
@@ -159,23 +160,22 @@ body {
 }
 
 .btn-secondary {
-  background: #6a6aff;
-  color: white;
+  background: #f2f3f5;
+  color: #2c3e50;
   padding: 14px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   font-family: inherit;
   width: 100%;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #6a11ff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(45, 52, 54, 0.4);
+  background: #e1e5eb;
+  transform: translateY(-1px);
 }
 
 .btn-secondary:disabled {
@@ -186,7 +186,7 @@ body {
 .btn-danger {
   background: none;
   border: none;
-  color: #e53e3e;
+  color: #e64646;
   font-size: 20px;
   cursor: pointer;
   padding: 0 8px;
@@ -194,7 +194,7 @@ body {
 }
 
 .btn-danger:hover {
-  color: #c53030;
+  color: #c73a3a;
 }
 
 .btn-small {
@@ -208,7 +208,7 @@ body {
   align-items: center;
   gap: 16px;
   margin: 6px 0;
-  color: #a0aec0;
+  color: #818c99;
   font-size: 13px;
 }
 
@@ -217,7 +217,7 @@ body {
   content: '';
   flex: 1;
   height: 1px;
-  background: #e2e8f0;
+  background: #e1e5eb;
 }
 
 /* ============================================================
@@ -235,66 +235,67 @@ body {
 
 .room-header h2 {
   font-size: 22px;
-  color: #2d3748;
+  color: #000000;
+  font-weight: 600;
 }
 
 .role-badge {
-  background: #e94560;
-  color: white;
+  background: #4a76a8;
+  color: #ffffff;
   padding: 4px 14px;
-  border-radius: 20px;
+  border-radius: 16px;
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .role-badge.host {
-  background: #e94560;
+  background: #4a76a8;
 }
 
 .role-badge.player {
-  background: #6a6aff;
+  background: #818c99;
 }
 
 .players-list {
   margin: 16px 0;
   padding: 16px;
-  background: #f7fafc;
+  background: #f7f8fa;
   border-radius: 12px;
 }
 
 .players-list h4 {
-  color: #4a5568;
+  color: #2c3e50;
   margin-bottom: 10px;
   font-size: 14px;
 }
 
 .player-badge {
   display: inline-block;
-  background: white;
+  background: #ffffff;
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 14px;
   margin: 4px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e1e5eb;
 }
 
 /* ============================================================
-   ПРОХОЖДЕНИЕ КВИЗА
+   ПРОХОЖДЕНИЕ КВИЗА (VK STYLE)
    ============================================================ */
 
 .progress-bar {
   width: 100%;
-  height: 6px;
-  background: #e2e8f0;
-  border-radius: 3px;
+  height: 4px;
+  background: #e1e5eb;
+  border-radius: 2px;
   margin-bottom: 20px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #4a76a8;
   transition: width 0.5s ease;
 }
 
@@ -307,23 +308,24 @@ body {
 
 .question-header .counter {
   font-weight: 600;
-  color: #4a5568;
+  color: #2c3e50;
   font-size: 14px;
 }
 
 .question-header .timer {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  color: #2d3748;
+  color: #2c3e50;
   transition: color 0.3s;
 }
 
 .question-text {
   font-size: 22px;
-  font-weight: 700;
-  color: #2d3748;
+  font-weight: 600;
+  color: #000000;
   margin-bottom: 24px;
   min-height: 60px;
+  line-height: 1.4;
 }
 
 .options-grid {
@@ -335,9 +337,9 @@ body {
 
 .option {
   padding: 14px 18px;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  background: white;
+  border: 2px solid #e1e5eb;
+  border-radius: 10px;
+  background: #ffffff;
   font-size: 16px;
   text-align: left;
   cursor: pointer;
@@ -347,23 +349,23 @@ body {
 }
 
 .option:hover:not(:disabled) {
-  border-color: #667eea;
-  background: #f7fafc;
+  border-color: #4a76a8;
+  background: #f7f8fa;
 }
 
 .option.selected {
-  border-color: #e94560;
-  background: #fff5f7;
+  border-color: #4a76a8;
+  background: #e8edf3;
 }
 
 .option.correct {
-  border-color: #48bb78;
-  background: #f0fff4;
+  border-color: #4bb34b;
+  background: #e8f5e8;
 }
 
 .option.wrong {
-  border-color: #fc8181;
-  background: #fff5f5;
+  border-color: #e64646;
+  background: #fde8e8;
 }
 
 .option:disabled {
@@ -377,11 +379,12 @@ body {
   height: 28px;
   line-height: 28px;
   text-align: center;
-  background: #edf2f7;
+  background: #f2f3f5;
   border-radius: 50%;
   margin-right: 12px;
   font-weight: 700;
   font-size: 13px;
+  color: #2c3e50;
 }
 
 .flex {
@@ -399,11 +402,11 @@ body {
    ============================================================ */
 
 .question-block {
-  background: #f7fafc;
+  background: #f7f8fa;
   padding: 16px;
   border-radius: 12px;
   margin-bottom: 12px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid #e1e5eb;
 }
 
 .question-block .options-row {
@@ -416,22 +419,22 @@ body {
 .question-block .options-row input[type="text"] {
   flex: 1;
   padding: 8px 12px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid #e1e5eb;
   border-radius: 8px;
   font-size: 14px;
   outline: none;
   font-family: inherit;
-  background: white;
+  background: #ffffff;
 }
 
 .question-block .options-row input[type="text"]:focus {
-  border-color: #e94560;
+  border-color: #4a76a8;
 }
 
 .question-block .options-row .letter {
   font-weight: 700;
   min-width: 24px;
-  color: #4a5568;
+  color: #2c3e50;
 }
 
 .question-block .options-row input[type="radio"],
@@ -439,7 +442,7 @@ body {
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: #e94560;
+  accent-color: #4a76a8;
 }
 
 /* ============================================================
@@ -457,27 +460,28 @@ body {
 
 .big-score {
   font-size: 64px;
-  font-weight: 800;
-  color: #2d3748;
+  font-weight: 700;
+  color: #000000;
 }
 
 .big-score span {
   font-size: 24px;
-  color: #a0aec0;
+  color: #818c99;
+  font-weight: 400;
 }
 
 .result-percentage {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 16px 0;
 }
 
 .result-percentage.passed {
-  color: #48bb78;
+  color: #4bb34b;
 }
 
 .result-percentage.failed {
-  color: #fc8181;
+  color: #e64646;
 }
 
 .result-details {
@@ -489,7 +493,7 @@ body {
 
 .result-detail-item {
   padding: 10px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e1e5eb;
   display: flex;
   gap: 10px;
   align-items: flex-start;
@@ -506,7 +510,7 @@ body {
 
 .result-detail-item .sub {
   font-size: 13px;
-  color: #718096;
+  color: #818c99;
 }
 
 /* ============================================================
@@ -517,7 +521,7 @@ body {
   max-width: 100%;
   max-height: 150px;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e1e5eb;
   margin-top: 6px;
 }
 
@@ -525,26 +529,8 @@ body {
   max-width: 100%;
   max-height: 200px;
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e1e5eb;
   margin-bottom: 16px;
-}
-
-.image-upload-btn {
-  display: inline-block;
-  background: #edf2f7;
-  color: #4a5568;
-  padding: 6px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none;
-  font-family: inherit;
-}
-
-.image-upload-btn:hover {
-  background: #e2e8f0;
 }
 
 /* ============================================================

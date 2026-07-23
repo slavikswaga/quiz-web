@@ -91,12 +91,12 @@ function App() {
     setSocket(newSocket);
 
     newSocket.on('connect', () => {
-      console.log('🟢 Подключено к серверу');
+      console.log('Подключено к серверу');
       setIsConnected(true);
     });
 
     newSocket.on('disconnect', () => {
-      console.log('🔴 Отключено от сервера');
+      console.log('Отключено от сервера');
       setIsConnected(false);
     });
 
@@ -164,11 +164,11 @@ function App() {
     });
 
     newSocket.on('error', (data) => {
-      alert('❌ ' + data.message);
+      alert('' + data.message);
     });
 
     newSocket.on('room-closed', (data) => {
-      alert('❌ ' + data.message);
+      alert('' + data.message);
       setScreen('menu');
     });
 
@@ -183,38 +183,38 @@ function App() {
 
   const createRoom = () => {
     if (!playerName.trim()) {
-      alert('⚠️ Введите ваше имя!');
+      alert('Введите ваше имя!');
       return;
     }
 
     if (!quizTitle.trim()) {
-      alert('⚠️ Введите название квиза!');
+      alert('Введите название квиза!');
       return;
     }
 
     for (let i = 0; i < questions.length; i++) {
       const q = questions[i];
       if (!q.text.trim()) {
-        alert(`⚠️ Заполните текст вопроса ${i + 1}!`);
+        alert(`Заполните текст вопроса ${i + 1}!`);
         return;
       }
       for (let j = 0; j < q.options.length; j++) {
         if (!q.options[j].trim()) {
-          alert(`⚠️ Заполните вариант ${String.fromCharCode(65 + j)} в вопросе ${i + 1}!`);
+          alert(`Заполните вариант ${String.fromCharCode(65 + j)} в вопросе ${i + 1}!`);
           return;
         }
       }
       if (q.correct.length === 0) {
-        alert(`⚠️ Выберите правильный ответ в вопросе ${i + 1}!`);
+        alert(`Выберите правильный ответ в вопросе ${i + 1}!`);
         return;
       }
     }
 
-    // Обработка картинок — проверка размера
+    // ✅ ИСПРАВЛЕНО: лимит 1MB (1024 * 1024)
     const processedQuestions = questions.map(q => {
       let image = q.image || null;
-      if (image && image.length > 200000) {
-        alert(`⚠️ Картинка в вопросе "${q.text}" слишком большая. Максимум 200KB.`);
+      if (image && image.length > 1024 * 1024) {
+        alert(`Картинка в вопросе "${q.text}" слишком большая. Максимум 1MB.`);
         image = null;
       }
       return {
@@ -240,12 +240,12 @@ function App() {
 
   const joinRoom = () => {
     if (!roomCode.trim()) {
-      alert('⚠️ Введите код комнаты!');
+      alert('Введите код комнаты!');
       return;
     }
 
     if (!playerName.trim()) {
-      alert('⚠️ Введите ваше имя!');
+      alert('Введите ваше имя!');
       return;
     }
 
@@ -282,7 +282,7 @@ function App() {
   const submitAnswer = () => {
     if (showAnswer || isHost) return;
     if (selectedAnswers.length === 0) {
-      alert('⚠️ Выберите ответ!');
+      alert('Выберите ответ!');
       return;
     }
 
@@ -325,7 +325,7 @@ function App() {
 
   const removeQuestion = (index) => {
     if (questions.length <= 1) {
-      alert('❌ Должен быть хотя бы один вопрос!');
+      alert('Должен быть хотя бы один вопрос!');
       return;
     }
     const newQuestions = [...questions];
@@ -376,9 +376,8 @@ function App() {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Проверка размера файла (максимум 200KB)
-    if (file.size > 200 * 1024) {
-      alert('⚠️ Картинка слишком большая! Максимум 200KB.');
+    if (file.size > 1024 * 1024) {
+      alert('Картинка слишком большая! Максимум 1MB.');
       e.target.value = '';
       return;
     }
@@ -409,11 +408,11 @@ function App() {
         <div className="container">
           <div className="card">
             <div className="header-brand">
-              <h1>🎯 Квиз<span>Мастер</span></h1>
+              <h1>VK QUIZ</h1>
               <p className="subtitle">Создавайте квизы и играйте с друзьями!</p>
               {!isConnected && (
                 <p style={{ color: '#e53e3e', fontSize: '14px', marginTop: '8px' }}>
-                  ⚠️ Нет подключения к серверу
+                  Нет подключения к серверу
                 </p>
               )}
             </div>
@@ -433,14 +432,14 @@ function App() {
                 className="btn-primary"
                 onClick={() => {
                   if (!playerName.trim()) {
-                    alert('⚠️ Введите ваше имя!');
+                    alert('Введите ваше имя!');
                     return;
                   }
                   setScreen('create');
                 }}
                 disabled={!isConnected}
               >
-                🏠 Создать комнату
+                Создать комнату
               </button>
 
               <div className="divider">или</div>
@@ -449,14 +448,14 @@ function App() {
                 className="btn-secondary"
                 onClick={() => {
                   if (!playerName.trim()) {
-                    alert('⚠️ Введите ваше имя!');
+                    alert('Введите ваше имя!');
                     return;
                   }
                   setScreen('join');
                 }}
                 disabled={!isConnected}
               >
-                🔗 Присоединиться
+                Присоединиться
               </button>
             </div>
           </div>
@@ -501,7 +500,7 @@ function App() {
                 onClick={joinRoom}
                 disabled={!isConnected}
               >
-                🔗 Присоединиться
+                Присоединиться
               </button>
 
               <button
@@ -525,7 +524,7 @@ function App() {
       <div className="app">
         <div className="container">
           <div className="card card-wide">
-            <h2>📝 Создать квиз</h2>
+            <h2>Создать квиз</h2>
             <p className="subtitle">Вы — организатор! Заполните вопросы</p>
 
             <div className="form-group" style={{ marginTop: '16px' }}>
@@ -577,7 +576,7 @@ function App() {
 
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
                     <label className="btn-secondary btn-small" style={{ width: 'auto', padding: '6px 16px', fontSize: '13px', cursor: 'pointer' }}>
-                      🖼️ Загрузить картинку (до 200KB)
+                      Загрузить картинку (до 1MB)
                       <input
                         type="file"
                         accept="image/*"
@@ -634,14 +633,14 @@ function App() {
                         onChange={() => toggleCorrectAnswer(qIndex, oIndex)}
                       />
                       <span style={{ fontSize: '12px', color: '#a0aec0', minWidth: '20px' }}>
-                        {q.correct.includes(oIndex) ? '✅' : '✓'}
+                        {q.correct.includes(oIndex) ? '✅' : ' '}
                       </span>
                     </div>
                   ))}
 
                   {q.multiple && (
                     <p style={{ fontSize: '12px', color: '#718096', marginTop: '4px' }}>
-                      💡 Выбрано правильных ответов: {q.correct.length}
+                      Выбрано правильных ответов: {q.correct.length}
                     </p>
                   )}
                 </div>
@@ -662,7 +661,7 @@ function App() {
                 onClick={createRoom}
                 disabled={!isConnected}
               >
-                🚀 Создать комнату и начать
+                Создать комнату и начать
               </button>
 
               <button
@@ -700,9 +699,9 @@ function App() {
         <div className="container">
           <div className="card">
             <div className="room-header">
-              <h2>🔵 Комната: {roomCode}</h2>
+              <h2>Комната: {roomCode}</h2>
               <span className={`role-badge ${amIHost ? 'host' : 'player'}`}>
-                {amIHost ? '👑 Организатор' : '👤 Участник'}
+                {amIHost ? 'Организатор' : 'Участник'}
               </span>
             </div>
 
@@ -713,7 +712,7 @@ function App() {
                   <p style={{ color: '#718096', fontSize: '14px', marginTop: '4px' }}>{quiz.description}</p>
                 )}
                 <p style={{ color: '#a0aec0', fontSize: '12px', marginTop: '4px' }}>
-                  📝 {quiz.questions?.length || 0} вопросов
+                  {quiz.questions?.length || 0} вопросов
                 </p>
               </div>
             )}
@@ -726,7 +725,7 @@ function App() {
               border: '2px solid #e94560'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '18px' }}>👑</span>
+                <span style={{ fontSize: '18px' }}></span>
                 <span style={{ fontWeight: '700', color: '#2d3748' }}>Организатор:</span>
                 <span style={{ fontWeight: '600', color: '#e94560' }}>{hostName}</span>
                 {amIHost && <span style={{ fontSize: '12px', color: '#718096' }}>(это вы)</span>}
@@ -734,17 +733,17 @@ function App() {
             </div>
 
             <div className="players-list">
-              <h4>👥 Игроки ({playersList.length})</h4>
+              <h4>Игроки ({playersList.length})</h4>
               {playersList.length > 0 ? (
                 playersList.map((name, idx) => (
                   <span key={idx} className="player-badge">
-                    🟢 {name}
+                    {name}
                     {name === playerName && ' (вы)'}
                   </span>
                 ))
               ) : (
                 <p style={{ color: '#a0aec0', fontSize: '14px' }}>
-                  ⏳ Ожидание игроков...
+                  Ожидание игроков...
                 </p>
               )}
             </div>
@@ -756,19 +755,19 @@ function App() {
                   onClick={startQuiz}
                   disabled={playersList.length < 1}
                 >
-                  🚀 Начать квиз {playersList.length < 1 && '(нет игроков)'}
+                  Начать квиз {playersList.length < 1 && '(нет игроков)'}
                 </button>
                 <p style={{ color: '#718096', fontSize: '13px', marginTop: '8px', textAlign: 'center' }}>
-                  👑 Вы организатор — вы зачитываете вопросы, но не отвечаете
+                  Вы организатор — вы зачитываете вопросы, но не отвечаете
                 </p>
               </>
             ) : amIPlayer ? (
               <p style={{ color: '#a0aec0', marginTop: '16px', textAlign: 'center' }}>
-                ⏳ Ожидайте начала квиза...
+                Ожидайте начала квиза...
               </p>
             ) : (
               <p style={{ color: '#e53e3e', marginTop: '16px', textAlign: 'center' }}>
-                ⚠️ Вы не в этой комнате
+                Вы не в этой комнате
               </p>
             )}
 
@@ -792,7 +791,7 @@ function App() {
         <div className="app">
           <div className="container">
             <div className="card text-center">
-              <h2>⏳ Загрузка вопроса...</h2>
+              <h2>Загрузка вопроса...</h2>
             </div>
           </div>
         </div>
@@ -818,15 +817,14 @@ function App() {
               <span className="counter">
                 Вопрос {questionIndex + 1} из {total}
                 {q.multiple && ' (множественный выбор)'}
-                {isHost && ' 👑 для зачитывания'}
               </span>
               {!isHost && (
                 <span className="timer" style={{ color: timeLeft <= 5 ? '#e53e3e' : '#2d3748' }}>
-                  ⏱️ {timeLeft}с
+                  {timeLeft}с
                 </span>
               )}
               {isHost && (
-                <span style={{ color: '#718096', fontSize: '14px' }}>⏱️ Зачитайте вопрос</span>
+                <span style={{ color: '#718096', fontSize: '14px' }}>Зачитайте вопрос</span>
               )}
             </div>
 
@@ -878,12 +876,12 @@ function App() {
 
             <div className="flex-between" style={{ marginBottom: '12px' }}>
               <span style={{ color: '#718096', fontSize: '14px' }}>
-                {isHost ? '👑 Вы зачитываете вопрос' : `👤 ${playerName}`}
+                {isHost ? 'Вы зачитываете вопрос' : `${playerName}`}
                 {!isHost && q.multiple && ' • Выберите все подходящие варианты'}
               </span>
               {!isHost && (
                 <span style={{ color: '#2d3748', fontWeight: '600' }}>
-                  🏆 {score} очков
+                  {score} очков
                 </span>
               )}
             </div>
@@ -894,7 +892,7 @@ function App() {
                 onClick={submitAnswer}
                 disabled={selectedAnswers.length === 0}
               >
-                ✅ Ответить
+                Ответить
               </button>
             )}
 
@@ -922,7 +920,7 @@ function App() {
 
                 {!isLast && (
                   <p style={{ textAlign: 'center', color: '#718096', fontSize: '14px' }}>
-                    ⏳ Ожидайте следующий вопрос...
+                    Ожидайте следующий вопрос...
                   </p>
                 )}
               </div>
@@ -931,13 +929,13 @@ function App() {
             {isHost && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
                 <p style={{ color: '#718096', fontSize: '14px', textAlign: 'center' }}>
-                  👑 Вы организатор — зачитайте вопрос участникам
+                  Вы организатор — зачитайте вопрос участникам
                 </p>
                 <button
                   className="btn-secondary"
                   onClick={nextQuestion}
                 >
-                  {isLast ? '🏁 Завершить квиз' : 'Следующий вопрос →'}
+                  {isLast ? 'Завершить квиз' : 'Следующий вопрос →'}
                 </button>
               </div>
             )}
@@ -963,28 +961,25 @@ function App() {
       <div className="app">
         <div className="container">
           <div className="card">
-            <h2 className="text-center">🎉 Квиз завершён!</h2>
+            <h2 className="text-center">Квиз завершён!</h2>
 
             {!isHost && (
               <div className="result-display">
                 <div className="big-score">
                   {myScore} <span>очков</span>
                 </div>
-                <div className={`result-percentage ${myPercentage >= 60 ? 'passed' : 'failed'}`}>
-                  {myPercentage}% • {myPercentage >= 60 ? '✅ Отлично!' : '❌ Попробуйте ещё раз'}
-                </div>
               </div>
             )}
 
             {isHost && (
               <div style={{ textAlign: 'center', padding: '16px 0', color: '#718096' }}>
-                👑 Вы организатор — вот результаты игроков
+                Вы организатор — вот результаты игроков
               </div>
             )}
 
             <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '2px solid #e2e8f0' }}>
               <h3 style={{ textAlign: 'center', color: '#2d3748', marginBottom: '16px' }}>
-                🏆 ЛИДЕРБОРД
+                ЛИДЕРБОРД
               </h3>
 
               {filteredLeaderboard.length > 0 ? (
@@ -1040,7 +1035,7 @@ function App() {
                   setLeaderboard([]);
                 }}
               >
-                🏠 На главную
+                На главную
               </button>
             </div>
           </div>
