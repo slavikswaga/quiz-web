@@ -563,7 +563,7 @@ function App() {
 
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
                     <label className="btn-secondary btn-small" style={{ width: 'auto', padding: '6px 16px', fontSize: '13px', cursor: 'pointer' }}>
-                      Загрузить картинку (до 1MB)
+                      Загрузить картинку (до 1Mb)
                       <input
                         type="file"
                         accept="image/*"
