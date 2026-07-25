@@ -3,10 +3,7 @@ import io from 'socket.io-client';
 import './App.css';
 
 function App() {
-  // ============================================================
-  // СОСТОЯНИЯ
-  // ============================================================
-
+  // Состояния
   const [screen, setScreen] = useState('menu');
   const [playerName, setPlayerName] = useState('');
   const [roomCode, setRoomCode] = useState('');
@@ -25,7 +22,7 @@ function App() {
   const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
-  // Состояние для создания квиза
+  // Создание квиза
   const [quizTitle, setQuizTitle] = useState('Мой супер квиз');
   const [quizDescription, setQuizDescription] = useState('');
   const [questions, setQuestions] = useState([
@@ -45,10 +42,7 @@ function App() {
     }
   ]);
 
-  // ============================================================
-  // ТАЙМЕР (только для игроков)
-  // ============================================================
-
+  // Таймер для игроков
   useEffect(() => {
     let interval = null;
 
@@ -82,10 +76,7 @@ function App() {
     };
   }, [screen, isHost, timeLeft, showAnswer, selectedAnswers, socket, roomCode, questionIndex]);
 
-  // ============================================================
-  // ПОДКЛЮЧЕНИЕ WEBSOCKET
-  // ============================================================
-
+  // Подключение WebSocket
   useEffect(() => {
     const newSocket = io('http://localhost:5000');
     setSocket(newSocket);
@@ -164,11 +155,11 @@ function App() {
     });
 
     newSocket.on('error', (data) => {
-      alert('' + data.message);
+      alert(data.message);
     });
 
     newSocket.on('room-closed', (data) => {
-      alert('' + data.message);
+      alert(data.message);
       setScreen('menu');
     });
 
@@ -177,10 +168,7 @@ function App() {
     };
   }, []);
 
-  // ============================================================
-  // ОТПРАВКА СОБЫТИЙ
-  // ============================================================
-
+  // Создание комнаты
   const createRoom = () => {
     if (!playerName.trim()) {
       alert('Введите ваше имя!');
@@ -195,26 +183,25 @@ function App() {
     for (let i = 0; i < questions.length; i++) {
       const q = questions[i];
       if (!q.text.trim()) {
-        alert(`Заполните текст вопроса ${i + 1}!`);
+        alert('Заполните текст вопроса ' + (i + 1));
         return;
       }
       for (let j = 0; j < q.options.length; j++) {
         if (!q.options[j].trim()) {
-          alert(`Заполните вариант ${String.fromCharCode(65 + j)} в вопросе ${i + 1}!`);
+          alert('Заполните вариант ' + String.fromCharCode(65 + j) + ' в вопросе ' + (i + 1));
           return;
         }
       }
       if (q.correct.length === 0) {
-        alert(`Выберите правильный ответ в вопросе ${i + 1}!`);
+        alert('Выберите правильный ответ в вопросе ' + (i + 1));
         return;
       }
     }
 
-    // ✅ ИСПРАВЛЕНО: лимит 1MB (1024 * 1024)
     const processedQuestions = questions.map(q => {
       let image = q.image || null;
       if (image && image.length > 1024 * 1024) {
-        alert(`Картинка в вопросе "${q.text}" слишком большая. Максимум 1MB.`);
+        alert('Картинка в вопросе "' + q.text + '" слишком большая. Максимум 1MB.');
         image = null;
       }
       return {
@@ -238,6 +225,7 @@ function App() {
     });
   };
 
+  // Присоединение к комнате
   const joinRoom = () => {
     if (!roomCode.trim()) {
       alert('Введите код комнаты!');
@@ -255,10 +243,12 @@ function App() {
     });
   };
 
+  // Старт квиза
   const startQuiz = () => {
     socket.emit('start-quiz', { roomCode });
   };
 
+  // Выбор ответа
   const handleSelectOption = (index) => {
     if (showAnswer || isHost) return;
 
@@ -279,6 +269,7 @@ function App() {
     }
   };
 
+  // Отправка ответа
   const submitAnswer = () => {
     if (showAnswer || isHost) return;
     if (selectedAnswers.length === 0) {
@@ -293,10 +284,12 @@ function App() {
     });
   };
 
+  // Следующий вопрос
   const nextQuestion = () => {
     socket.emit('next-question', { roomCode });
   };
 
+  // Выход из комнаты
   const leaveRoom = () => {
     socket.emit('leave-room', { roomCode });
     setScreen('menu');
@@ -306,10 +299,7 @@ function App() {
     setIsHost(false);
   };
 
-  // ============================================================
-  // UI ФУНКЦИИ ДЛЯ СОЗДАНИЯ КВИЗА
-  // ============================================================
-
+  // UI функции для создания квиза
   const addQuestion = () => {
     setQuestions([
       ...questions,
@@ -397,19 +387,17 @@ function App() {
     setQuestions(newQuestions);
   };
 
-  // ============================================================
-  // РЕНДЕРИНГ
-  // ============================================================
+  // ===== РЕНДЕРИНГ =====
 
-  // МЕНЮ
+  // Меню
   if (screen === 'menu') {
     return (
       <div className="app">
         <div className="container">
           <div className="card">
             <div className="header-brand">
-              <h1>VK QUIZ</h1>
-              <p className="subtitle">Создавайте квизы и играйте с друзьями!</p>
+              <h1>VK Quiz</h1>
+              <p className="subtitle">Создавай квизы и играй с друзьями</p>
               {!isConnected && (
                 <p style={{ color: '#e53e3e', fontSize: '14px', marginTop: '8px' }}>
                   Нет подключения к серверу
@@ -421,7 +409,7 @@ function App() {
               <label>Ваше имя</label>
               <input
                 type="text"
-                placeholder="Введите ваше имя"
+                placeholder="Введите имя..."
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
               />
@@ -464,20 +452,19 @@ function App() {
     );
   }
 
-  // ПРИСОЕДИНИТЬСЯ
+  // Присоединиться
   if (screen === 'join') {
     return (
       <div className="app">
         <div className="container">
           <div className="card">
-            <h2 style={{ marginBottom: '8px' }}>🔗 Присоединиться</h2>
+            <h2 style={{ marginBottom: '8px' }}>Присоединиться</h2>
             <p className="subtitle">Введите код комнаты</p>
 
             <div className="form-group" style={{ marginTop: '16px' }}>
               <label>Код комнаты</label>
               <input
                 type="text"
-                placeholder="Например: ABC123"
                 value={roomCode}
                 onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
                 maxLength={6}
@@ -507,7 +494,7 @@ function App() {
                 className="btn-secondary"
                 onClick={() => setScreen('menu')}
               >
-                ← Назад
+                Назад
               </button>
             </div>
           </div>
@@ -516,16 +503,16 @@ function App() {
     );
   }
 
-  // СОЗДАНИЕ КВИЗА
+  // Создание квиза
   if (screen === 'create') {
     const letters = ['A', 'B', 'C', 'D'];
 
     return (
       <div className="app">
         <div className="container">
-          <div className="card card-wide">
+          <div className="card card-create">
             <h2>Создать квиз</h2>
-            <p className="subtitle">Вы — организатор! Заполните вопросы</p>
+            <p className="subtitle">Создайте вопросы</p>
 
             <div className="form-group" style={{ marginTop: '16px' }}>
               <label>Название квиза</label>
@@ -562,7 +549,7 @@ function App() {
                     onClick={() => removeQuestion(qIndex)}
                     title="Удалить вопрос"
                   >
-                    ✕
+                    ×
                   </button>
                 </div>
 
@@ -590,7 +577,7 @@ function App() {
                         onClick={() => removeImage(qIndex)}
                         style={{ fontSize: '14px' }}
                       >
-                        ✕ Удалить
+                        × Удалить
                       </button>
                     )}
                   </div>
@@ -622,19 +609,16 @@ function App() {
                       <span className="letter">{letters[oIndex]}.</span>
                       <input
                         type="text"
-                        placeholder={`Вариант ${letters[oIndex]}`}
+                        placeholder={'Вариант ' + letters[oIndex]}
                         value={opt}
                         onChange={(e) => updateOption(qIndex, oIndex, e.target.value)}
                       />
                       <input
                         type={q.multiple ? 'checkbox' : 'radio'}
-                        name={`correct_${qIndex}`}
+                        name={'correct_' + qIndex}
                         checked={q.correct.includes(oIndex)}
                         onChange={() => toggleCorrectAnswer(qIndex, oIndex)}
                       />
-                      <span style={{ fontSize: '12px', color: '#a0aec0', minWidth: '20px' }}>
-                        {q.correct.includes(oIndex) ? '✅' : ' '}
-                      </span>
                     </div>
                   ))}
 
@@ -668,7 +652,7 @@ function App() {
                 className="btn-secondary"
                 onClick={() => setScreen('menu')}
               >
-                ← Назад
+                Назад
               </button>
             </div>
           </div>
@@ -677,7 +661,7 @@ function App() {
     );
   }
 
-  // КОМНАТА
+  // Комната
   if (screen === 'room') {
     let hostName = quiz?.host;
 
@@ -700,7 +684,7 @@ function App() {
           <div className="card">
             <div className="room-header">
               <h2>Комната: {roomCode}</h2>
-              <span className={`role-badge ${amIHost ? 'host' : 'player'}`}>
+              <span className={'role-badge ' + (amIHost ? 'host' : 'player')}>
                 {amIHost ? 'Организатор' : 'Участник'}
               </span>
             </div>
@@ -757,9 +741,6 @@ function App() {
                 >
                   Начать квиз {playersList.length < 1 && '(нет игроков)'}
                 </button>
-                <p style={{ color: '#718096', fontSize: '13px', marginTop: '8px', textAlign: 'center' }}>
-                  Вы организатор — вы зачитываете вопросы, но не отвечаете
-                </p>
               </>
             ) : amIPlayer ? (
               <p style={{ color: '#a0aec0', marginTop: '16px', textAlign: 'center' }}>
@@ -776,7 +757,7 @@ function App() {
               onClick={leaveRoom}
               style={{ marginTop: '12px' }}
             >
-              ← Выйти из комнаты
+              Выйти из комнаты
             </button>
           </div>
         </div>
@@ -784,7 +765,7 @@ function App() {
     );
   }
 
-  // ИГРА
+  // Игра
   if (screen === 'play') {
     if (!currentQuestion) {
       return (
@@ -808,9 +789,9 @@ function App() {
     return (
       <div className="app">
         <div className="container">
-          <div className="card card-wide">
+          <div className="card">
             <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${progress}%` }} />
+              <div className="progress-fill" style={{ width: progress + '%' }} />
             </div>
 
             <div className="question-header">
@@ -822,9 +803,6 @@ function App() {
                 <span className="timer" style={{ color: timeLeft <= 5 ? '#e53e3e' : '#2d3748' }}>
                   {timeLeft}с
                 </span>
-              )}
-              {isHost && (
-                <span style={{ color: '#718096', fontSize: '14px' }}>Зачитайте вопрос</span>
               )}
             </div>
 
@@ -867,8 +845,8 @@ function App() {
                   >
                     <span className="letter">{letters[idx]}</span>
                     {opt}
-                    {!isHost && showAnswer && correctAnswers.includes(idx) && ' ✅'}
-                    {!isHost && showAnswer && selectedAnswers.includes(idx) && !correctAnswers.includes(idx) && ' ❌'}
+                    {!isHost && showAnswer && correctAnswers.includes(idx) && ' ✓'}
+                    {!isHost && showAnswer && selectedAnswers.includes(idx) && !correctAnswers.includes(idx) && ' ✗'}
                   </button>
                 );
               })}
@@ -876,7 +854,6 @@ function App() {
 
             <div className="flex-between" style={{ marginBottom: '12px' }}>
               <span style={{ color: '#718096', fontSize: '14px' }}>
-                {isHost ? 'Вы зачитываете вопрос' : `${playerName}`}
                 {!isHost && q.multiple && ' • Выберите все подходящие варианты'}
               </span>
               {!isHost && (
@@ -902,14 +879,14 @@ function App() {
                   padding: '12px',
                   borderRadius: '10px',
                   background: selectedAnswers.length > 0 && selectedAnswers.every(a => correctAnswers.includes(a)) && selectedAnswers.length === correctAnswers.length ? '#f0fff4' : '#fff5f5',
-                  border: `2px solid ${selectedAnswers.length > 0 && selectedAnswers.every(a => correctAnswers.includes(a)) && selectedAnswers.length === correctAnswers.length ? '#48bb78' : '#fc8181'}`,
+                  border: '2px solid ' + (selectedAnswers.length > 0 && selectedAnswers.every(a => correctAnswers.includes(a)) && selectedAnswers.length === correctAnswers.length ? '#48bb78' : '#fc8181'),
                   textAlign: 'center',
                   fontWeight: '600',
                   color: selectedAnswers.length > 0 && selectedAnswers.every(a => correctAnswers.includes(a)) && selectedAnswers.length === correctAnswers.length ? '#38a169' : '#e53e3e'
                 }}>
                   {selectedAnswers.length > 0 && selectedAnswers.every(a => correctAnswers.includes(a)) && selectedAnswers.length === correctAnswers.length
-                    ? `✅ Правильно!`
-                    : '❌ Неправильно'
+                    ? 'Правильно!'
+                    : 'Неправильно'
                   }
                   {q.multiple && (
                     <div style={{ fontSize: '13px', fontWeight: '400', marginTop: '4px' }}>
@@ -928,14 +905,11 @@ function App() {
 
             {isHost && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
-                <p style={{ color: '#718096', fontSize: '14px', textAlign: 'center' }}>
-                  Вы организатор — зачитайте вопрос участникам
-                </p>
                 <button
                   className="btn-secondary"
                   onClick={nextQuestion}
                 >
-                  {isLast ? 'Завершить квиз' : 'Следующий вопрос →'}
+                  {isLast ? 'Завершить квиз' : 'Следующий вопрос'}
                 </button>
               </div>
             )}
@@ -945,7 +919,7 @@ function App() {
     );
   }
 
-  // РЕЗУЛЬТАТЫ
+  // Результаты
   if (screen === 'results') {
     const totalQuestionsCount = quiz?.questions?.length || 0;
     const maxPossibleScore = totalQuestionsCount * 100;
@@ -971,15 +945,9 @@ function App() {
               </div>
             )}
 
-            {isHost && (
-              <div style={{ textAlign: 'center', padding: '16px 0', color: '#718096' }}>
-                Вы организатор — вот результаты игроков
-              </div>
-            )}
-
             <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '2px solid #e2e8f0' }}>
               <h3 style={{ textAlign: 'center', color: '#2d3748', marginBottom: '16px' }}>
-                ЛИДЕРБОРД
+                Лидерборд
               </h3>
 
               {filteredLeaderboard.length > 0 ? (
@@ -1003,7 +971,7 @@ function App() {
                       minWidth: '40px',
                       color: idx === 0 ? '#f6ad55' : idx === 1 ? '#a0aec0' : idx === 2 ? '#ed8936' : '#a0aec0'
                     }}>
-                      {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}`}
+                      {idx === 0 ? '1' : idx === 1 ? '2' : idx === 2 ? '3' : '#' + (idx + 1)}
                     </span>
                     <span style={{ flex: 1, fontWeight: '600' }}>
                       {item.name}

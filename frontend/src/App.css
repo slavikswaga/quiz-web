@@ -1,5 +1,5 @@
 /* ============================================================
-   ГЛОБАЛЬНЫЕ СТИЛИ (VK COLOR SCHEME)
+   ГЛОБАЛЬНЫЕ СТИЛИ
    ============================================================ */
 
 * {
@@ -19,7 +19,7 @@ body {
 
 .app {
   width: 100%;
-  padding: 20px;
+  padding: 40px;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -27,30 +27,22 @@ body {
 }
 
 .container {
-  max-width: 550px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
 }
 
-/* ============================================================
-   КАРТОЧКА (VK STYLE)
-   ============================================================ */
-
 .card {
   background: #ffffff;
-  padding: 40px 45px;
+  padding: 48px 56px;
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  animation: fadeIn 0.4s ease;
+  width: 100%;
 }
 
-.card-wide {
-  max-width: 650px;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+.card-full {
+  max-width: 900px;
+  min-width: unset;
 }
 
 /* ============================================================
@@ -59,11 +51,11 @@ body {
 
 .header-brand {
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .header-brand h1 {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   color: #000000;
   letter-spacing: -0.5px;
@@ -75,23 +67,23 @@ body {
 
 .header-brand .subtitle {
   color: #818c99;
-  font-size: 15px;
-  margin-top: 4px;
+  font-size: 16px;
+  margin-top: 6px;
 }
 
 /* ============================================================
-   ФОРМА (VK STYLE)
+   ФОРМА
    ============================================================ */
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .form-group label {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #2c3e50;
 }
@@ -99,8 +91,8 @@ body {
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 12px 16px;
-  font-size: 15px;
+  padding: 14px 18px;
+  font-size: 16px;
   border: 2px solid #e1e5eb;
   border-radius: 10px;
   outline: none;
@@ -119,25 +111,25 @@ body {
 
 .form-group textarea {
   resize: vertical;
-  min-height: 60px;
+  min-height: 80px;
 }
 
 /* ============================================================
-   КНОПКИ (VK STYLE)
+   КНОПКИ
    ============================================================ */
 
 .menu-buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .btn-primary {
   background: #4a76a8;
   color: #ffffff;
-  padding: 14px;
-  font-size: 16px;
+  padding: 16px;
+  font-size: 17px;
   font-weight: 600;
   border: none;
   border-radius: 10px;
@@ -162,8 +154,8 @@ body {
 .btn-secondary {
   background: #f2f3f5;
   color: #2c3e50;
-  padding: 14px;
-  font-size: 16px;
+  padding: 16px;
+  font-size: 17px;
   font-weight: 600;
   border: none;
   border-radius: 10px;
@@ -187,9 +179,9 @@ body {
   background: none;
   border: none;
   color: #e64646;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
-  padding: 0 8px;
+  padding: 0 10px;
   transition: color 0.2s;
 }
 
@@ -198,8 +190,8 @@ body {
 }
 
 .btn-small {
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 10px 20px;
+  font-size: 15px;
   width: auto;
 }
 
@@ -207,9 +199,9 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 6px 0;
+  margin: 8px 0;
   color: #818c99;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .divider::before,
@@ -228,13 +220,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
 .room-header h2 {
-  font-size: 22px;
+  font-size: 24px;
   color: #000000;
   font-weight: 600;
 }
@@ -242,9 +234,9 @@ body {
 .role-badge {
   background: #4a76a8;
   color: #ffffff;
-  padding: 4px 14px;
-  border-radius: 16px;
-  font-size: 13px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -259,7 +251,7 @@ body {
 
 .players-list {
   margin: 16px 0;
-  padding: 16px;
+  padding: 16px 18px;
   background: #f7f8fa;
   border-radius: 12px;
 }
@@ -267,13 +259,13 @@ body {
 .players-list h4 {
   color: #2c3e50;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .player-badge {
   display: inline-block;
   background: #ffffff;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: 20px;
   font-size: 14px;
   margin: 4px;
@@ -281,15 +273,15 @@ body {
 }
 
 /* ============================================================
-   ПРОХОЖДЕНИЕ КВИЗА (VK STYLE)
+   ИГРА
    ============================================================ */
 
 .progress-bar {
   width: 100%;
-  height: 4px;
+  height: 6px;
   background: #e1e5eb;
-  border-radius: 2px;
-  margin-bottom: 20px;
+  border-radius: 3px;
+  margin-bottom: 24px;
   overflow: hidden;
 }
 
@@ -303,24 +295,24 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .question-header .counter {
   font-weight: 600;
   color: #2c3e50;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .question-header .timer {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: #2c3e50;
   transition: color 0.3s;
 }
 
 .question-text {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   color: #000000;
   margin-bottom: 24px;
@@ -375,37 +367,27 @@ body {
 
 .option .letter {
   display: inline-block;
-  width: 28px;
-  height: 28px;
-  line-height: 28px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
   text-align: center;
   background: #f2f3f5;
   border-radius: 50%;
   margin-right: 12px;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 14px;
   color: #2c3e50;
 }
 
-.flex {
-  display: flex;
-}
-
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 /* ============================================================
-   ВОПРОСЫ ПРИ СОЗДАНИИ
+   СОЗДАНИЕ КВИЗА
    ============================================================ */
 
 .question-block {
   background: #f7f8fa;
-  padding: 16px;
+  padding: 18px;
   border-radius: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   border: 2px solid #e1e5eb;
 }
 
@@ -435,6 +417,7 @@ body {
   font-weight: 700;
   min-width: 24px;
   color: #2c3e50;
+  font-size: 15px;
 }
 
 .question-block .options-row input[type="radio"],
@@ -471,7 +454,7 @@ body {
 }
 
 .result-percentage {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
   margin: 16px 0;
 }
@@ -485,7 +468,7 @@ body {
 }
 
 .result-details {
-  max-height: 250px;
+  max-height: 300px;
   overflow-y: auto;
   margin: 16px 0;
   text-align: left;
@@ -495,7 +478,7 @@ body {
   padding: 10px;
   border-bottom: 1px solid #e1e5eb;
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: flex-start;
 }
 
@@ -527,7 +510,7 @@ body {
 
 .question-image {
   max-width: 100%;
-  max-height: 200px;
+  max-height: 220px;
   border-radius: 12px;
   border: 1px solid #e1e5eb;
   margin-bottom: 16px;
@@ -541,45 +524,106 @@ body {
 .mt-12 { margin-top: 12px; }
 .mt-16 { margin-top: 16px; }
 .mt-20 { margin-top: 20px; }
+.mt-24 { margin-top: 24px; }
 
 /* ============================================================
    АДАПТИВ
    ============================================================ */
 
-@media (max-width: 500px) {
+@media (max-width: 1024px) {
+  .container {
+    max-width: 750px;
+  }
+  .card {
+    padding: 32px 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
   .card {
     padding: 24px 20px;
+    border-radius: 14px;
   }
-
   .header-brand h1 {
-    font-size: 26px;
+    font-size: 28px;
   }
-
+  .question-text {
+    font-size: 20px;
+  }
+  .big-score {
+    font-size: 48px;
+  }
   .btn-primary,
   .btn-secondary {
     font-size: 15px;
-    padding: 12px;
+    padding: 14px;
   }
-
   .room-header {
     flex-direction: column;
     align-items: flex-start;
   }
-
-  .question-text {
-    font-size: 18px;
+  .room-header h2 {
+    font-size: 20px;
   }
+}
 
+.card-create {
+  max-width: 1400px;
+  width: 100%;
+}
+.container-wide {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 500px) {
+  .card {
+    padding: 18px 14px;
+  }
+  .header-brand h1 {
+    font-size: 22px;
+  }
+  .question-text {
+    font-size: 17px;
+    min-height: 50px;
+  }
   .option {
     font-size: 14px;
     padding: 12px 14px;
   }
-
-  .big-score {
-    font-size: 48px;
+  .option .letter {
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    margin-right: 10px;
   }
-
+  .big-score {
+    font-size: 36px;
+  }
+  .big-score span {
+    font-size: 18px;
+  }
+  .result-percentage {
+    font-size: 20px;
+  }
   .question-block .options-row {
     flex-wrap: wrap;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+  .btn-primary,
+  .btn-secondary {
+    font-size: 14px;
+    padding: 12px;
   }
 }
