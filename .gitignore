@@ -8,3 +8,4 @@ backend/node_modules/
 backend/package-lock.json
 build/
 dist/
+backend/quiz.db
